@@ -13,12 +13,25 @@ public final class R {
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
+    public static final class id {
+        public static final int btn_connect=0x7f070002;
+        public static final int btn_import=0x7f070003;
+        public static final int btn_sound=0x7f070004;
+        public static final int tv_detail=0x7f070000;
+        public static final int tv_result=0x7f070001;
+    }
     public static final class layout {
         public static final int activity_main=0x7f030000;
     }
+    public static final class raw {
+        public static final int data_refer=0x7f040000;
+        public static final int k1k8_50=0x7f040001;
+        public static final int k20k16_200=0x7f040002;
+    }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int hello_world=0x7f040001;
+        public static final int app_name=0x7f050000;
+        public static final int detail=0x7f050002;
+        public static final int result=0x7f050001;
     }
     public static final class style {
         /** 
@@ -42,10 +55,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f060001;
     }
 }

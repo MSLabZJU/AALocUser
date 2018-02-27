@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">AALocUser</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="result">Here is the result.</string>
+    <string name="detail">Here is the detail information.</string>
 
 </resources>

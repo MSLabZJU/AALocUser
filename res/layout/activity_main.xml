@@ -1,12 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
+    android:orientation="vertical" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:text="@string/detail"
+        android:fadeScrollbars="true"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="outsideOverlay"/>
+    
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:gravity="center_horizontal"
+        android:text="@string/result" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="connect" />
+
+    <Button
+        android:id="@+id/btn_import"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="import" />
+
+    <Button
+        android:id="@+id/btn_sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:layout_marginBottom="125dp"
+        android:text="start" />
+</LinearLayout>
