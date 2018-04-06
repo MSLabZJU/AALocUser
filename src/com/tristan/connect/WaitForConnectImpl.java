@@ -19,7 +19,7 @@ public class WaitForConnectImpl implements Runnable {
 	
 	public void run() {
 		while (true) {
-			if (flagPool.allConnectOrNot()) {
+			if (flagPool.allConnectOrNot_one() && flagPool.allConnectOrNot_two()) {
 				btn_sound.post(new Runnable() {
 					
 					public void run() {

@@ -51,7 +51,7 @@ public class DataTrans {
 	public void WriteToText() {
 
 		try {
-			pw = new OutputStreamWriter(new FileOutputStream("/mnt/sdcard/test.txt", true), "GBK");
+			pw = new OutputStreamWriter(new FileOutputStream("/mnt/sdcard/AALocResult.txt", true), "GBK");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {

@@ -43,7 +43,7 @@ public class ComputeImpl implements Runnable {
 				
 				FFTcc fcc = new FFTcc(signalFFT, refer);
 				fcc.FindFccMax();
-				float[] rcc = fcc.getrcc();
+				float[] rcc = fcc.getrcc();         //频域互相关的结果
 				float max = fcc.getmaxvalue();
 				int maxplace = fcc.getmaxplace();
 				

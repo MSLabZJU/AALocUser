@@ -9,8 +9,10 @@ import android.util.Log;
 
 public class ConfigPool {
 	//设定中心发声结点的index
-	public static final int INDEX = 5;
+	public static int index = 10;
 	
+
+
 	//设置音频来源为麦克风
 	public static final int AUDIOSOURCE = MediaRecorder.AudioSource.MIC;
 	//设置采样频率
@@ -37,5 +39,13 @@ public class ConfigPool {
 	
 	public AudioRecord getAudioRecord(){
 		return new AudioRecord(AUDIOSOURCE, FREQUENCY, CHANNEL, AUDIOFORMAT, BUFFERSIZE);
+	}
+	
+	public static int getIndex() {
+		return index;
+	}
+
+	public static void setIndex(int index) {
+		ConfigPool.index = index;
 	}
 }

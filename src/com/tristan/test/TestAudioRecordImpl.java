@@ -1,4 +1,4 @@
-package com.tristan.work;
+package com.tristan.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,35 +9,35 @@ import java.util.Timer;
 
 import android.media.AudioRecord;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.tristan.aalocuser.ConfigPool;
 import com.tristan.aalocuser.DataPool;
 import com.tristan.aalocuser.FlagPool;
+import com.tristan.work.ComputeImpl;
 
-/**
- * 
- * @author TristanHuang 2018-2-25 下午10:55:24
- */
-public class AudioRecordImpl implements Runnable {
+public class TestAudioRecordImpl implements Runnable {
+
 
 	private DataPool dataPool;
 	private FlagPool flagPool;
 	private AudioRecord audioRecord;
 	private String rawfile;
 	private String wavfile;
-	private Button btn;
+	private TextView tv_info;
 	private TextView tv_result;
-	private Timer timer;
+	private Button btn_test;
+	private double dist;
 
-	public AudioRecordImpl(DataPool dataPool, FlagPool flagPool, Button btn, TextView tv_result, Timer timer, AudioRecord audioRecord) {
+	public TestAudioRecordImpl(DataPool dataPool, FlagPool flagPool, 
+			TextView tv_info, TextView tv_result, 
+			Button btn_test, AudioRecord audioRecord) {
 		this.dataPool = dataPool;
 		this.flagPool = flagPool;
-		this.btn = btn;
+		this.tv_info = tv_info;
 		this.tv_result = tv_result;
-		this.timer = timer;
+		this.btn_test = btn_test;
 		this.audioRecord = audioRecord;
 	}
 
@@ -49,7 +49,31 @@ public class AudioRecordImpl implements Runnable {
 		copyWaveFile(rawfile, wavfile); // 得到可以播放的wav文件
 		new File(rawfile).delete();
 		new Thread(new ComputeImpl(wavfile, dataPool, flagPool)).start();
-		new Thread(new DistanceCompute(dataPool, flagPool, btn, tv_result, timer, audioRecord)).start();
+		while (true) {
+			if (flagPool.getComputeCenralBeacon()) {
+				dist = dataPool.progressForTest();
+				flagPool.resetCompute();
+				break;
+			}
+		}
+		tv_info.post(new Runnable() {
+			
+			public void run() {
+				tv_info.append("the distance of test: " + dist  +"\n *************");
+			}
+		});
+		tv_result.post(new Runnable() {
+			
+			public void run() {
+				tv_result.setText("Dist:   " + dist);
+			}
+		});
+		btn_test.post(new Runnable() {
+			
+			public void run() {
+				btn_test.setEnabled(true);
+			}
+		});
 	}
 	
 
@@ -85,9 +109,9 @@ public class AudioRecordImpl implements Runnable {
 			// 将in中的数据通过缓冲数组data写入到out中
 			int size = 0;
 			while ((size = in.read(data)) != -1) {
-				Log.i("IO", "copyWaveFile..." + size);
 				out.write(data, 0, size);
 			}
+			Log.i("init", "将数据写入完毕");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -182,5 +206,6 @@ public class AudioRecordImpl implements Runnable {
 		header[43] = (byte) ((totalAudioLen >> 24) & 0xff);
 		out.write(header, 0, 44);
 	}
+
 
 }

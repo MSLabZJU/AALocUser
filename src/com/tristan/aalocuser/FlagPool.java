@@ -1,5 +1,8 @@
 package com.tristan.aalocuser;
 
+import android.R.integer;
+import android.util.Log;
+
 /**
  * 
  * @author TristanHuang
@@ -13,11 +16,22 @@ public class FlagPool {
 	public static int feedBackStart = 0; //开始录音的反馈标志位
 	public static boolean isRecord = false; //记录录音状态的标志位
 	
+	public static boolean readyForNext = true;
+	
+	/** status for test */
+	public static boolean test = false;
+	//第一组连接状态
 	private static boolean connect1 = false;
 	private static boolean connect2 = false;
 	private static boolean connect3 = false;
 	private static boolean connect4 = false;
 	private static boolean connect5 = false;
+	//第二组连接状态
+	private static boolean connect6 = false;
+	private static boolean connect7 = false;
+	private static boolean connect8 = false;
+	private static boolean connect9 = false;
+	private static boolean connect10 = false;
 	
 	private static boolean compute1 = false;
 	private static boolean compute2 = false;
@@ -38,8 +52,21 @@ public class FlagPool {
 	}
 	//*****************************************************
 	
-	public boolean allConnectOrNot(){
+	public boolean allConnectOrNot_one(){
 		return connect1 && connect2 && connect3 && connect4 && connect5;
+	}
+	
+	public boolean allConnectOrNot_two(){
+		return connect6 && connect7 && connect8 && connect9 && connect10;
+	}
+	
+	
+	public boolean getConnectCentralBeacon(){
+		return connect5;
+	}
+	
+	public boolean getComputeCenralBeacon(){
+		return compute5;
 	}
 	
 	public void resetCompute(){
@@ -75,6 +102,7 @@ public class FlagPool {
 			break;
 		case 5:
 			compute5 = flag;
+			Log.i("init", "index = 5 :" + flag);
 			break;
 		case 6:
 			compute6 = flag;
@@ -99,6 +127,21 @@ public class FlagPool {
 			break;
 		case 5:
 			connect5 = flag;
+			break;
+		case 6:
+			connect6 = flag;
+			break;
+		case 7:
+			connect7 = flag;
+			break;
+		case 8:
+			connect8 = flag;
+			break;
+		case 9:
+			connect9 = flag;
+			break;
+		case 10:
+			connect10 = flag;
 			break;
 		default:
 			break;

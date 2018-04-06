@@ -12,13 +12,35 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int textview_border=0x7f020001;
     }
     public static final class id {
-        public static final int btn_connect=0x7f070002;
-        public static final int btn_import=0x7f070003;
-        public static final int btn_sound=0x7f070004;
-        public static final int tv_detail=0x7f070000;
-        public static final int tv_result=0x7f070001;
+        public static final int btn_connect=0x7f070017;
+        public static final int btn_import=0x7f070018;
+        public static final int btn_reset=0x7f070016;
+        public static final int btn_sound=0x7f070019;
+        public static final int btn_test=0x7f070015;
+        public static final int cb_datalock=0x7f070014;
+        public static final int dt_dis_10_6=0x7f07000f;
+        public static final int dt_dis_10_7=0x7f070010;
+        public static final int dt_dis_10_8=0x7f070011;
+        public static final int dt_dis_10_9=0x7f070012;
+        public static final int dt_dis_5_1=0x7f07000b;
+        public static final int dt_dis_5_2=0x7f07000c;
+        public static final int dt_dis_5_3=0x7f07000d;
+        public static final int dt_dis_5_4=0x7f07000e;
+        public static final int et_pressure_1st=0x7f070009;
+        public static final int et_pressure_2nd=0x7f07000a;
+        public static final int ll_btns=0x7f070013;
+        public static final int ll_connect=0x7f070001;
+        public static final int ll_ets=0x7f070007;
+        public static final int ll_pressure=0x7f070002;
+        public static final int ll_pressure_input=0x7f070008;
+        public static final int tv_detail=0x7f070005;
+        public static final int tv_ip=0x7f070000;
+        public static final int tv_layer=0x7f070004;
+        public static final int tv_pressure=0x7f070003;
+        public static final int tv_result=0x7f070006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

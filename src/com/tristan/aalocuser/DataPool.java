@@ -10,21 +10,38 @@ import org.w3c.dom.Node;
 import com.tristan.algorithm.*;
 
 import android.R.integer;
+import android.content.Context;
+import android.hardware.SensorManager;
+import android.util.Log;
 
 public class DataPool {
 	
 	public static final int NODENUM = 5;
 	
 	private static double[] resultLoc = new double[3]; //定位结果
-	private static int loopNum = 5;
+	private static int loopNum = 1;
 	private static double[][] resultLoop = new double[loopNum][3] ; //存循环几次的结果
 	private static int loopNumTemp = 0;   //目前正处理的位置
 	
-	//四个距离值
-	public static double fl1 = 10;
-	public static double fl2 = 10;
-	public static double fl3 = 10;
-	public static double fl4 = 10;	
+	//pressure
+	//教九-5楼：1010.2  4楼：1011.35  mid：1011.12
+	public static float pressure_one = 1016.2f;   //1011.35f
+	public static float pressure_two = 1015.72f;   //1010.2f
+	public static float pressure_mid = (pressure_one + pressure_two)/2;
+	private static int floorID = 1;
+	
+
+	//第一组四个距离值
+	public static double distBeacon_5_1 = 10;
+	public static double distBeacon_5_2 = 10;
+	public static double distBeacon_5_3 = 10;
+	public static double distBeacon_5_4 = 10;
+	//第二组四个距离值
+	public static double distBeacon_10_6 = 10;
+	public static double distBeacon_10_7 = 10;
+	public static double distBeacon_10_8 = 10;
+	public static double distBeacon_10_9 = 10;
+
 	
 	public static int time = 0;
 	
@@ -42,7 +59,7 @@ public class DataPool {
     private static double num56,num15,num25,num35,num45;
     
     //给Beacon发指令的PrintWriter
-    private static PrintWriter[] pws;
+    private static PrintWriter[] pws = new PrintWriter[10];
     
     //用于存放录音文件的与 文件夹名称的相关标志位
 	public static int FolderNum = 1;
@@ -52,7 +69,7 @@ public class DataPool {
 	private static String rawfileName;
 	private static String wavfileName;
 	public static final String REFERAUDIO_STRING = "/mnt/sdcard/data_refer.wav";
-    
+	
 	//************构造器区域*****************
 	private static DataPool instance = new DataPool();
 	
@@ -67,8 +84,34 @@ public class DataPool {
 	
 	public void sendEndSignal(){
 		for (PrintWriter pw : pws) {
-			pw.println("01");   //01作为结束录音的标志位
+			if (pw != null) {
+				pw.println("01"); //01作为结束录音的标志位
+			}  
 		}
+	}
+	
+	public static int getFloorID() {
+		return floorID;
+	}
+
+	public static void setFloorID(int floorID) {
+		DataPool.floorID = floorID;
+	}
+	
+	public double progressForTest(){
+		num5 = Math.abs(realpl51-realpl52);
+		num6 = Math.abs(realpl61-realpl62);
+		
+		num56 = num5 - num6;
+		dis5 = (num56/(double)2/44100)*340;//计算目标节点和5号节点的距离
+		
+		return dis5;
+	}
+	
+	public static void setPressures(float pressure_1st, float pressure_2nd){
+		pressure_one = pressure_1st;
+		pressure_two = pressure_2nd;
+		pressure_mid = (pressure_one + pressure_two)/2;
 	}
 	
 	public double[] progressOne(){
@@ -92,16 +135,16 @@ public class DataPool {
 		dis5 = (num56/(double)2/44100)*340;//计算目标节点和5号节点的距离
 		
 		num15 = num1 - num5;
-		dis1 = dis5 + (num15/(double)44100+(fl1/340))*340;
+		dis1 = dis5 + (num15/(double)44100+(distBeacon_5_1/340))*340;
 		
 		num25 = num2 - num5;
-		dis2 = dis5 + (num25/(double)44100+(fl2/340))*340;
+		dis2 = dis5 + (num25/(double)44100+(distBeacon_5_2/340))*340;
 		
 		num35 = num3 - num5;
-		dis3 = dis5 + (num35/(double)44100+(fl3/340))*340;
+		dis3 = dis5 + (num35/(double)44100+(distBeacon_5_3/340))*340;
 		
 		num45 = num4 - num5;
-		dis4 = dis5 + (num45/(double)44100+(fl4/340))*340;
+		dis4 = dis5 + (num45/(double)44100+(distBeacon_5_4/340))*340;
 		
 		List<double[]> xnode = new ArrayList<double[]>();
 		xnode.add(new double[]{8.615, 0.079, 4.110});
@@ -172,17 +215,29 @@ public class DataPool {
 	
     public void setPrintWriter(int index, PrintWriter pw){
     	pws[index-1] = pw;
+    	Log.i("init", "set the pw: " + index);
     }
     
     public PrintWriter[] getPrintWriters(){
     	return pws;
     }
     
-    public static void setDistance(double valOne, double valTwo, double valThree, double valFour){ 
-    	fl1 = valOne;
-    	fl2 = valTwo;
-    	fl3 = valThree;
-    	fl4 = valFour;
+    public PrintWriter getPrintWriterOnlyOne(){
+    	return pws[9];
+    }
+    
+    public static void setDistance_One(double valOne, double valTwo, double valThree, double valFour){ 
+    	distBeacon_5_1 = valOne;
+    	distBeacon_5_2 = valTwo;
+    	distBeacon_5_3 = valThree;
+    	distBeacon_5_4 = valFour;
+    }
+    
+    public static void setDistance_Two(double valOne, double valTwo, double valThree, double valFour){ 
+    	distBeacon_10_6 = valOne;
+    	distBeacon_10_7 = valTwo;
+    	distBeacon_10_8 = valThree;
+    	distBeacon_10_9 = valFour;
     }
     
     public void setRealPl(int index, double valOne, double valTwo) {
