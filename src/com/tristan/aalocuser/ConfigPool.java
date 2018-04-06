@@ -1,5 +1,6 @@
 package com.tristan.aalocuser;
 
+import android.R.integer;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -9,7 +10,8 @@ import android.util.Log;
 
 public class ConfigPool {
 	//设定中心发声结点的index
-	public static int index = 10;
+	public static int instantTimeIndex = 10;
+	public static int currentIndex = 10;
 	
 
 
@@ -41,11 +43,16 @@ public class ConfigPool {
 		return new AudioRecord(AUDIOSOURCE, FREQUENCY, CHANNEL, AUDIOFORMAT, BUFFERSIZE);
 	}
 	
-	public static int getIndex() {
-		return index;
+	public static int getCurrentIndex() {
+		return currentIndex;
 	}
 
-	public static void setIndex(int index) {
-		ConfigPool.index = index;
+	public static void setCurrentIndex() {
+		ConfigPool.currentIndex = ConfigPool.instantTimeIndex;
+	}
+	
+
+	public static void setInstantTimeIndex(int instantTimeIndex) {
+		ConfigPool.instantTimeIndex = instantTimeIndex;
 	}
 }

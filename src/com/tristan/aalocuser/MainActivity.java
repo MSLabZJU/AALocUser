@@ -268,7 +268,7 @@ public class MainActivity extends Activity {
 				while (true) {
 					long time2 = System.currentTimeMillis();
 					if ((time2-time1) > (long)3) {
-						timer.schedule(new Clock(dataPool, ConfigPool.getIndex()), 300);
+						timer.schedule(new Clock(dataPool, ConfigPool.getCurrentIndex()), 300);
 						break;
 					}
 				}
@@ -340,18 +340,19 @@ public class MainActivity extends Activity {
 								continue;
 							}
 							flagPool.readyForNext = false;
+							ConfigPool.setCurrentIndex();
 							//¿ªÊ¼Â¼Òô
 							timer.schedule(new RecordStart(dataPool, flagPool, btn_sound, tv_result, timer, audioRecord), 0);
 							long time1 = System.currentTimeMillis();
 							while (true) {
 								if (flagPool.feedBackStart == 5) {
-									timer.schedule(new Clock(dataPool, ConfigPool.getIndex()), 300);
+									timer.schedule(new Clock(dataPool, ConfigPool.getCurrentIndex()), 300);
 									flagPool.feedBackStart = 0;
 									break;
 								}
 								long time2 = System.currentTimeMillis();
 								if ((time2-time1) > (long)3) {
-									timer.schedule(new Clock(dataPool, ConfigPool.getIndex()), 300);
+									timer.schedule(new Clock(dataPool, ConfigPool.getCurrentIndex()), 300);
 									flagPool.feedBackStart = 0;
 									break;
 								}

@@ -75,13 +75,13 @@ public class DistanceCompute implements Runnable {
 					long time1 = System.currentTimeMillis();
 					while (true) {
 						if (flagPool.feedBackStart == 5) {
-							timer.schedule(new Clock(dataPool, ConfigPool.getIndex()), 400); //开始时钟同步
+							timer.schedule(new Clock(dataPool, ConfigPool.getCurrentIndex()), 400); //开始时钟同步
 							flagPool.feedBackStart = 0;
 							break;
 						}
 						long time2 = System.currentTimeMillis();
 						if ((time2-time1) > (long)3) {
-							timer.schedule(new Clock(dataPool, ConfigPool.getIndex()), 400); //开始时钟同步
+							timer.schedule(new Clock(dataPool, ConfigPool.getCurrentIndex()), 400); //开始时钟同步
 							flagPool.feedBackStart = 0;
 							break;
 						}

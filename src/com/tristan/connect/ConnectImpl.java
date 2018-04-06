@@ -75,7 +75,7 @@ public class ConnectImpl implements Runnable {
 				String keyString = br.readLine();
 				while (keyString != null) {
 					//如果中心结点对应的线程收到了信号"000"，那么开始发声
-					if (keyString.equals("000") && (index == ConfigPool.getIndex())){
+					if (keyString.equals("000") && (index == ConfigPool.getCurrentIndex())){
 						Log.i("init", "接收到结点发过来的000指令，准备发声");
 						timer.schedule(new TargetGo(activity, dataPool, flagPool, timer), 400);
 					}

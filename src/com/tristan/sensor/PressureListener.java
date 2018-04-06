@@ -52,7 +52,7 @@ public class PressureListener implements SensorEventListener{
 		});
 		if (pressure < DataPool.pressure_mid && DataPool.getFloorID() == 1) {
 			DataPool.setFloorID(2);
-			ConfigPool.setIndex(10);
+			ConfigPool.setInstantTimeIndex(10);
 			tv_layer.post(new Runnable() {
 				public void run() {
 					tv_layer.setText("2nd floor");
@@ -60,7 +60,7 @@ public class PressureListener implements SensorEventListener{
 			});
 		} else if (pressure > DataPool.pressure_mid && DataPool.getFloorID() == 2) {
 			DataPool.setFloorID(1);
-			ConfigPool.setIndex(5);
+			ConfigPool.setInstantTimeIndex(5);
 			tv_layer.post(new Runnable() {
 				public void run() {
 					tv_layer.setText("1st floor");
